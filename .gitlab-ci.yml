@@ -12,8 +12,8 @@ build:
       mkdir -p /kaniko/.docker
       echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 -w 0)\"}}}" > /kaniko/.docker/config.json
     - >-
-      export FILE_CONTENTS=$(cat ubuntu_packages)
-      echo "File contents: $FILE_CONTENTS"
+      export ubuntu_packages=$(cat ubuntu_packages)
+      echo "ubuntu_packages: $ubuntu_packages"
     - >-
       /kaniko/executor
       --context "${CI_PROJECT_DIR}/docker_container"
