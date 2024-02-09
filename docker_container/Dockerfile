@@ -40,6 +40,12 @@ RUN if [ -n "${ubuntu_packages}" ]; then \
     apt-get install -y ${ubuntu_packages}; \
     fi
 
+RUN if [ -n "${ubuntu_packages}" ]; then \
+    for item in ${ubuntu_packages}; do \
+    echo $item; \
+    done; \
+    fi
+
 
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
