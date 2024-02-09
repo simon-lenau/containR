@@ -1,8 +1,8 @@
 
 
 ARG r_version="r-base:latest"
-ARG ubuntu_packages=[]
-ARG r_packages=["data.table"]
+ARG ubuntu_packages=""
+ARG r_packages="data.table"
 
 # =========================== > Base environment < =========================== #
 
@@ -10,6 +10,8 @@ FROM ${r_version}
 
 # Make arguments available as environment variables in container
 ARG r_version
+ARG ubuntu_packages
+ARG r_packages
 
 ENV \
     R_VERSION=${r_version}
@@ -28,12 +30,11 @@ COPY /container_setup/R/Makevars /.R/
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
 # =========================== > Ubuntu Packages < ============================ #
-RUN apt-get update -y
 
-RUN if [ ${ubuntu_packages} ]; then \
-    for item in ${ubuntu_packages}; do \
-    apt-get install -y ${item}; \
-    done \
+
+RUN if [ -n ${ubuntu_packages} ]; then \
+    apt-get update -y && \
+    apt-get install -y ${ubuntu_packages}; \
     fi
 
 
@@ -41,9 +42,9 @@ RUN if [ ${ubuntu_packages} ]; then \
 
 
 # ============================== > R packages < ============================== #
-
-RUN if [ ${R_packages} ]; then \ 
-    Rscript /install_missing_packages.R ${R_packages} \
+RUN if [ -n ${r_packages} ]; then \ 
+    printf "\n\t - %s" ${r_packages} \
+    Rscript /install_missing_packages.R ${r_packages}; \
     fi
 # "data.table"\
 # "units"\
