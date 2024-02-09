@@ -34,33 +34,31 @@ COPY /container_setup/R/Makevars /.R/
 
 # =========================== > Ubuntu Packages < ============================ #
 
-RUN echo "Attempting to install ubuntu_packages:"; \
-    printf "\t - %s\n" ${ubuntu_packages}
 
-# RUN if [ -n "${ubuntu_packages}" ]; then \
-#     apt-get update -y && \
-#     apt-get install -y ${ubuntu_packages}; \
-#     fi
+RUN if [ -n "${ubuntu_packages}" ]; then \
+    echo "Attempting to install ubuntu_packages:"; \
+    printf "\t - %s\n" ${ubuntu_packages}; \
+    apt-get update -y && \
+    apt-get install -y ${ubuntu_packages} > ubuntu_packages.log 2>&1 && \
+    echo "... successful!" || \
+    (sed -i 's/^/\t/' ubuntu_packages.log && cat ubuntu_packages.log); \
+    fi
 
-# RUN if [ -n "${ubuntu_packages}" ]; then \
-#     for item in ${ubuntu_packages}; do \
-#     echo $item; \
-#     done; \
-#     fi
 
 
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
 
 # ============================== > R packages < ============================== #
-RUN echo "Attempting to install:"; \
-    printf "\t - %s\n" ${r_packages}
 
-# RUN if [ -n "${r_packages}" ]; then \ 
-#     echo "Attempting to install:"; \
-#     printf "\t - %s\n" ${r_packages}; \
-#     Rscript /install_missing_packages.R ${r_packages}; \
-#     fi
+
+RUN if [ -n "${r_packages}" ]; then \ 
+    echo "Attempting to install r_packages:"; \
+    printf "\t - %s\n" ${r_packages}; \
+    Rscript /install_missing_packages.R ${r_packages} > r_packages.log 2>&1 && \
+    echo "... successful!" || \
+    (sed -i 's/^/\t/' r_packages.log && cat r_packages.log); \
+    fi
 # "data.table"\
 # "units"\
 # "s2"\
