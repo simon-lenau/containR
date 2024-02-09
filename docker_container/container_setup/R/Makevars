@@ -1,0 +1,2 @@
+# Use all available cores for package compilation
+MAKEFLAGS = -j$(nproc)
