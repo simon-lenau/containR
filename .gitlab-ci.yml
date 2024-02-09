@@ -1,10 +1,15 @@
 stages:
   - build
+
+
 build:
   stage: build
   image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
+  before_script:
+    - export ubuntu_packages=$(cat ubuntu_packages)
+    - export r_packages=$(cat r_packages)
   script:
     - mkdir -p /kaniko/.docker
     - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 -w 0)\"}}}" > /kaniko/.docker/config.json
@@ -13,5 +18,7 @@ build:
       --context "${CI_PROJECT_DIR}/docker_container"
       --dockerfile "${CI_PROJECT_DIR}/docker_container/Dockerfile"
       --destination "${CI_REGISTRY_IMAGE}:BLA"
+      --build-arg ubuntu_packages=${ubuntu_packages}
+      --build-arg r_packages=${r_packages}
   # rules:
   #   - if: $CI_COMMIT_TAG
