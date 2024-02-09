@@ -20,6 +20,7 @@ build:
       --dockerfile "./docker_container/Dockerfile"
       --destination "${CI_REGISTRY_IMAGE}:BLA"
       --build-arg "ubuntu_packages"="${ubuntu_packages}"
-      --build-arg "r_packages"="${r_packages}"
+
+  # --build-arg "r_packages"="${r_packages}"
   # rules:
   #   - if: $CI_COMMIT_TAG
