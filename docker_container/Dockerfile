@@ -45,11 +45,11 @@ RUN if [ -n "${ubuntu_packages}" ]; then \
 
 
 # ============================== > R packages < ============================== #
-RUN if [ -n "${r_packages}" ]; then \ 
-    echo "Attempting to install:"; \
-    printf "\t - %s\n" ${r_packages}; \
-    Rscript /install_missing_packages.R ${r_packages} > /install_missing_packages.log; \
-    fi
+# RUN if [ -n "${r_packages}" ]; then \ 
+#     echo "Attempting to install:"; \
+#     printf "\t - %s\n" ${r_packages}; \
+#     Rscript /install_missing_packages.R ${r_packages}; \
+#     fi
 # "data.table"\
 # "units"\
 # "s2"\
