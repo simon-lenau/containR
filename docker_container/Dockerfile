@@ -1,5 +1,6 @@
 
 
+
 ARG r_version="r-base:latest"
 ARG ubuntu_packages=""
 ARG r_packages="data.table"
@@ -7,6 +8,8 @@ ARG r_packages="data.table"
 # =========================== > Base environment < =========================== #
 
 FROM ${r_version}
+
+SHELL ["/bin/bash", "-c"]
 
 # Make arguments available as environment variables in container
 ARG r_version
