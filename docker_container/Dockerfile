@@ -37,10 +37,10 @@ COPY /container_setup/R/Makevars /.R/
 RUN echo "Attempting to install ubuntu_packages:"; \
     printf "\t - %s\n" ${ubuntu_packages}
 
-RUN if [ -n "${ubuntu_packages}" ]; then \
-    apt-get update -y && \
-    apt-get install -y ${ubuntu_packages}; \
-    fi
+# RUN if [ -n "${ubuntu_packages}" ]; then \
+#     apt-get update -y && \
+#     apt-get install -y ${ubuntu_packages}; \
+#     fi
 
 # RUN if [ -n "${ubuntu_packages}" ]; then \
 #     for item in ${ubuntu_packages}; do \
@@ -53,6 +53,9 @@ RUN if [ -n "${ubuntu_packages}" ]; then \
 
 
 # ============================== > R packages < ============================== #
+RUN echo "Attempting to install:"; \
+    printf "\t - %s\n" ${r_packages}
+
 # RUN if [ -n "${r_packages}" ]; then \ 
 #     echo "Attempting to install:"; \
 #     printf "\t - %s\n" ${r_packages}; \
