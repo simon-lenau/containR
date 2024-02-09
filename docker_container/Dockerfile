@@ -43,7 +43,7 @@ RUN if [ -n ${ubuntu_packages} ]; then \
 
 # ============================== > R packages < ============================== #
 RUN if [ -n ${r_packages} ]; then \ 
-    printf "\n\t - %s" ${r_packages} \
+    printf "\n\t - %s" ${r_packages}; \
     Rscript /install_missing_packages.R ${r_packages}; \
     fi
 # "data.table"\
