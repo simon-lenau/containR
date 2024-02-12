@@ -18,7 +18,7 @@ build:
       echo "CI_REGISTRY_PASSWORD: ${CI_REGISTRY_PASSWORD}";
       echo "CI_PROJECT_DIR: ${CI_PROJECT_DIR}";
       echo "CI_REGISTRY_IMAGE: ${CI_REGISTRY_IMAGE}";
-      echo "----------------------------------------------------------------------";
+      echo "----------------------------------------------------------------------"
     - >-
       /kaniko/executor
       --context "./docker_container"
