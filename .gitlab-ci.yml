@@ -10,16 +10,16 @@ build:
   script:
     - >-
       mkdir -p /kaniko/.docker;
-      echo "{\"auths\":{\"${CI_REGISTRY}\":{\"oauth2\":\"$(printf "%s" "glpat-mf6XzgTC1o-fPPwx8VH3" | base64 -w 0)\"}}}" > /kaniko/.docker/config.json;
+      echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 -w 0)\"}}}" > /kaniko/.docker/config.json;
       cd ${CI_PROJECT_DIR}
     - >-
       /kaniko/executor
       --context "./docker_container"
       --dockerfile "./docker_container/Dockerfile"
       --destination "${CI_REGISTRY_IMAGE}:oOo"
-
-  # --build-arg "ubuntu_packages"="${ubuntu_packages}"
-    # --build-arg "r_packages"="${r_packages}"
+      --build-arg "ubuntu_packages"="${ubuntu_packages}"
+      --build-arg "r_packages"="${r_packages}"
+      --skip-push-permission-check
   # rules:
   #   - if: $CI_COMMIT_TAG
       # export ubuntu_packages=$(cat ./ubuntu_packages);
