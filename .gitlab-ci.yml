@@ -12,8 +12,8 @@ build:
       mkdir -p /kaniko/.docker;
       echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 -w 0)\"}}}" > /kaniko/.docker/config.json;
       cd ${CI_PROJECT_DIR};
-      export ubuntu_packages=$(cat ./ubuntu_packages);
-      export r_packages=$(cat ./r_packages);
+      export ubuntu_packages=$(cat requirements/Ubuntu);
+      export r_packages=$(cat requirements/R);
     - >-
       /kaniko/executor
       --context "./"
