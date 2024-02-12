@@ -11,14 +11,7 @@ build:
     - >-
       mkdir -p /kaniko/.docker;
       echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 -w 0)\"}}}" > /kaniko/.docker/config.json;
-      cd ${CI_PROJECT_DIR};
-      echo "----------------------------------------------------------------------";
-      echo "CI_REGISTRY: ${CI_REGISTRY} <";
-      echo "CI_REGISTRY_USER: ${CI_REGISTRY_USER}";
-      echo "CI_REGISTRY_PASSWORD: ${CI_REGISTRY_PASSWORD}";
-      echo "CI_PROJECT_DIR: ${CI_PROJECT_DIR}";
-      echo "CI_REGISTRY_IMAGE: ${CI_REGISTRY_IMAGE}";
-      echo "----------------------------------------------------------------------"
+      cd ${CI_PROJECT_DIR}
     - >-
       /kaniko/executor
       --context "./docker_container"
