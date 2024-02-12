@@ -18,7 +18,7 @@ build:
       /kaniko/executor
       --context "./docker_container"
       --dockerfile "./docker_container/Dockerfile"
-      --destination "${CI_REGISTRY_IMAGE}:BLA"
+      --destination "${CI_REGISTRY_IMAGE}:1.0"
       --build-arg "ubuntu_packages"="${ubuntu_packages}"
       --build-arg "r_packages"="${r_packages}"
   # rules:
