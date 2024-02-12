@@ -36,10 +36,9 @@ COPY /container_setup/R/Makevars /.R/
 # > ubuntu_packages.log 2>&1
 
 RUN if [ -n "${ubuntu_packages}" ]; then \
-    apt-get update -y; \
     echo "Attempting to install ubuntu_packages:"; \
     printf "\t - %s\n" ${ubuntu_packages}; \
-    ubuntu_pkg_log="$(apt-get install -y ${ubuntu_packages})" && \
+    ubuntu_pkg_log="$(apt-get update -y && apt-get install -y ${ubuntu_packages})" && \
     echo "... successful!" || \
     (sed 's/^/\t/' <<< "${ubuntu_pkg_log}" && cat ${ubuntu_pkg_log}); \
     fi
@@ -57,7 +56,7 @@ RUN if [ -n "${r_packages}" ]; then \
     printf "\t - %s\n" ${r_packages}; \
     r_pkg_log="$(Rscript /install_missing_packages.R ${r_packages})" && \
     echo "... successful!" || \
-    (sed 's/^/\t/' <<< "${r_pkg_log}" && cat ${r_pkg_log}); 
+    (sed 's/^/\t/' <<< "${r_pkg_log}" && cat ${r_pkg_log}); \
     fi
 # "data.table"\
 # "units"\
