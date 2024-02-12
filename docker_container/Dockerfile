@@ -40,7 +40,7 @@ RUN if [ -n "${ubuntu_packages}" ]; then \
     printf "\t - %s\n" ${ubuntu_packages}; \
     ubuntu_pkg_log="$(apt-get update -y && apt-get install -y ${ubuntu_packages})" && \
     echo "... successful!" || \
-    (sed 's/^/\t/' <<< "${ubuntu_pkg_log}" && printf "%s\n" "${ubuntu_pkg_log}"); \
+    (sed 's/^/\t/' <<< "${ubuntu_pkg_log}" && printf "%s\n" "${ubuntu_pkg_log}" && exit 1); \
     fi
 
 
@@ -56,7 +56,7 @@ RUN if [ -n "${r_packages}" ]; then \
     printf "\t - %s\n" ${r_packages}; \
     Rscript /install_missing_packages.R ${r_packages} > r_packages.log 2>&1 && \
     echo "... successful!" || \
-    (sed -i 's/^/\t/' r_packages.log && cat r_packages.log); \
+    (sed -i 's/^/\t/' r_packages.log && cat r_packages.log  && exit 1); \
     rm -rf r_packages.log; \
     fi
 # "data.table"\
