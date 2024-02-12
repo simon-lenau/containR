@@ -40,7 +40,7 @@ RUN if [ -n "${ubuntu_packages}" ]; then \
     printf "\t - %s\n" ${ubuntu_packages}; \
     ubuntu_pkg_log="$(apt-get update -y && apt-get install -y ${ubuntu_packages})" && \
     echo "... successful!" || \
-    (sed 's/^/\t/' <<< "${ubuntu_pkg_log}" && cat ${ubuntu_pkg_log}); \
+    (sed 's/^/\t/' <<< "${ubuntu_pkg_log}" && printf "%s\n" "${ubuntu_pkg_log}"); \
     fi
 
 
