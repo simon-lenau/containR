@@ -16,8 +16,8 @@ build:
       export r_packages=$(cat ./r_packages);
     - >-
       /kaniko/executor
-      --context "./docker_container"
-      --dockerfile "./docker_container/Dockerfile"
+      --context "./"
+      --dockerfile "./Dockerfile"
       --destination "${CI_REGISTRY_IMAGE}:sometag"
       --build-arg "ubuntu_packages"="${ubuntu_packages}"
       --build-arg "r_packages"="${r_packages}"
