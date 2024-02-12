@@ -55,9 +55,8 @@ RUN if [ -n "${r_packages}" ]; then \
     echo "Attempting to install r_packages:"; \
     printf "\t - %s\n" ${r_packages}; \
     Rscript /install_missing_packages.R ${r_packages} > r_packages.log 2>&1 && \
-    echo "... successful!" || \
+    (echo "... successful!" && rm -rf r_packages.log) || \
     (sed -i 's/^/\t/' r_packages.log && cat r_packages.log  && exit 1); \
-    rm -rf r_packages.log; \
     fi
 # "data.table"\
 # "units"\
