@@ -33,15 +33,15 @@ COPY /container_setup/R/Makevars /.R/
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
 # =========================== > Ubuntu Packages < ============================ #
-
+# > ubuntu_packages.log 2>&1
 
 RUN if [ -n "${ubuntu_packages}" ]; then \
     apt-get update -y; \
     echo "Attempting to install ubuntu_packages:"; \
     printf "\t - %s\n" ${ubuntu_packages}; \
-    apt-get install -y ${ubuntu_packages} > ubuntu_packages.log 2>&1 && \
+    ubuntu_pkg_log="$(apt-get install -y ${ubuntu_packages})" && \
     echo "... successful!" || \
-    (sed -i 's/^/\t/' ubuntu_packages.log && cat ubuntu_packages.log); \
+    (sed 's/^/\t/' <<< "${ubuntu_pkg_log}" && cat ${ubuntu_pkg_log}); \
     fi
 
 
