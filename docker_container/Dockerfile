@@ -54,9 +54,10 @@ RUN if [ -n "${ubuntu_packages}" ]; then \
 RUN if [ -n "${r_packages}" ]; then \ 
     echo "Attempting to install r_packages:"; \
     printf "\t - %s\n" ${r_packages}; \
-    r_pkg_log="$(Rscript /install_missing_packages.R ${r_packages})" && \
+    Rscript /install_missing_packages.R ${r_packages} > r_packages.log 2>&1 && \
     echo "... successful!" || \
-    (sed 's/^/\t/' <<< "${r_pkg_log}" && cat ${r_pkg_log}); \
+    (sed -i 's/^/\t/' r_packages.log && cat r_packages.log); \
+    rm -rf r_packages.log; \
     fi
 # "data.table"\
 # "units"\
