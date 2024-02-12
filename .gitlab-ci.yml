@@ -21,5 +21,3 @@ build:
       --build-arg "r_packages"="${r_packages}"
   # rules:
   #   - if: $CI_COMMIT_TAG
-      # export ubuntu_packages=$(cat ./ubuntu_packages);
-      # export r_packages=$(cat ./r_packages);
