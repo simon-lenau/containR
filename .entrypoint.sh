@@ -1,24 +1,31 @@
 #!/bin/bash
 
+# =========================== > Environment File < =========================== #
+# ┌┌────────────────────────────────────────────────────────────────────────┐┐ #
+# ││ This will check for an environment file and source it if it is there   ││ #
+# └└────────────────────────────────────────────────────────────────────────┘┘ #
+
 CONTAINER_ENV_FILE=/.env
 
 if [ -f ${CONTAINER_ENV_FILE} ]; then
     source ${CONTAINER_ENV_FILE}
 fi
 
+# ────────────────────────────────── <end> ─────────────────────────────────── #
+
 # ======== > Define some default folders if they are not specified < ========= #
 
-if [ -z ${INPUT_PATH_IN_CONTAINER} ]; then
-    export INPUT_PATH_IN_CONTAINER=/DefaultProject/
+if [ -z ${WORKDIR} ]; then
+    export WORKDIR=/DefaultProject/
 fi
-if [ -z ${OUTPUT_PATH_IN_CONTAINER} ]; then
-    export OUTPUT_PATH_IN_CONTAINER=${INPUT_PATH_IN_CONTAINER}output/
+if [ -z ${OUTDIR} ]; then
+    export OUTDIR=${WORKDIR}output/
 fi
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
 # ============================ > Create folders < ============================ #
-mkdir -p ${INPUT_PATH_IN_CONTAINER}
-mkdir -p ${OUTPUT_PATH_IN_CONTAINER}
+mkdir -p ${WORKDIR}
+mkdir -p ${OUTDIR}
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
 # ============= > Copy global .Rprofile and add path messages < ============== #
@@ -36,12 +43,12 @@ copy_rprofile() {
 }
 
 copy_rprofile ${HOME}/
-copy_rprofile ${INPUT_PATH_IN_CONTAINER}
+copy_rprofile ${WORKDIR}
 
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
 # ===================== > Enter projects input folder < ====================== #
-cd ${INPUT_PATH_IN_CONTAINER}
+cd ${WORKDIR}
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
 # ========== > Execute the command(s) passed as arguments by user < ========== #
