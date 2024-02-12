@@ -1,4 +1,4 @@
-libssl-devx
+libssl-dev
 libudunits2-dev 
 libgdal-dev 
 libproj-dev 
