@@ -34,7 +34,7 @@ COPY /container_setup/R/Makevars /.R/
 
 # =========================== > Ubuntu Packages < ============================ #
 # > ubuntu_packages.log 2>&1
-
+# BLA
 RUN if [ -n "${ubuntu_packages}" ]; then \
     apt-get update -y; \
     echo "Attempting to install ubuntu_packages:"; \
