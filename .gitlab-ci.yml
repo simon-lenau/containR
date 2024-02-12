@@ -10,7 +10,7 @@ build:
   script:
     - >-
       mkdir -p /kaniko/.docker;
-      echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "glpat-mf6XzgTC1o-fPPwx8VH3" | base64 -w 0)\"}}}" > /kaniko/.docker/config.json;
+      echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "oauth2" "glpat-mf6XzgTC1o-fPPwx8VH3" | base64 -w 0)\"}}}" > /kaniko/.docker/config.json;
       cd ${CI_PROJECT_DIR};
       export ubuntu_packages=$(cat ./ubuntu_packages);
       export r_packages=$(cat ./r_packages);
