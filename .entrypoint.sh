@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CONTAINER_ENV_FILE=/.env/container.env
+CONTAINER_ENV_FILE=/.env
 
 if [ -f ${CONTAINER_ENV_FILE} ]; then
     source ${CONTAINER_ENV_FILE}
@@ -26,10 +26,12 @@ mkdir -p ${OUTPUT_PATH_IN_CONTAINER}
 copy_rprofile() {
     # If .Rprofile does not exist in folder
     if [ ! -f ${1}/.Rprofile ]; then
-        # Copy /.Rprofile to folder
-        cp /.Rprofile ${1}/
-        # Change log message in .Rprofile to contain folder
-        sed -i 's|\(Loading\s*\).*\/\(.Rprofile\)|\1'"${1}"'\2|' ${1}/.Rprofile
+        # # Copy /.Rprofile to folder
+        # cp /.Rprofile ${1}/
+        # # Change log message in .Rprofile to contain folder
+        # sed -i 's|\(Loading\s*\).*\/\(.Rprofile\)|\1'"${1}"'\2|' ${1}/.Rprofile
+        # Create symbolic link in folder
+        ln -s /.Rprofile ${1}/.Rprofile
     fi
 }
 

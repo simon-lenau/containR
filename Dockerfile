@@ -26,21 +26,20 @@ RUN mkdir -p ${HOME}
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
 # ============================ > R setup files < ============================= #
-COPY /container_setup/R/.Rprofile /
-COPY /container_setup/R/install_missing_packages.R /
+COPY R/.Rprofile /
+COPY R/install_missing_packages.R /
 RUN mkdir -p /.R/
-COPY /container_setup/R/Makevars /.R/
+COPY R/Makevars /.R/
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
 # =========================== > Ubuntu Packages < ============================ #
-# > ubuntu_packages.log 2>&1
 
 RUN if [ -n "${ubuntu_packages}" ]; then \
     echo "Attempting to install ubuntu_packages:"; \
     printf "\t - %s\n" ${ubuntu_packages}; \
-    ubuntu_pkg_log="$(apt-get update -y && apt-get install -y ${ubuntu_packages})" && \
-    echo "... successful!" || \
-    (sed 's/^/\t/' <<< "${ubuntu_pkg_log}" && printf "%s\n" "${ubuntu_pkg_log}" && exit 1); \
+    (apt-get update -y && apt-get install -y ${ubuntu_packages}) > ubuntu_packages.log 2>&1 && \
+    (echo "... successful!" && rm -rf ubuntu_packages.log) || \
+    (sed -i 's/^/\t/' ubuntu_packages.log && cat ubuntu_packages.log  && exit 1); \
     fi
 
 
@@ -58,17 +57,6 @@ RUN if [ -n "${r_packages}" ]; then \
     (echo "... successful!" && rm -rf r_packages.log) || \
     (sed -i 's/^/\t/' r_packages.log && cat r_packages.log  && exit 1); \
     fi
-# "data.table"\
-# "units"\
-# "s2"\
-# "sf"\
-# "ggplot2"\
-# "ggnewscale"\
-# "spatstat"\
-# "survey"\
-# "parallel"\
-# "viridis"
-
 
 RUN rm -f /install_missing_packages.R 
 
@@ -76,7 +64,7 @@ RUN rm -f /install_missing_packages.R
 
 # =============== > Set entrypoint script & default command < ================ #
 
-COPY /container_setup/.entrypoint.sh /
+COPY .entrypoint.sh /
 
 ENTRYPOINT ["/.entrypoint.sh"]
 
