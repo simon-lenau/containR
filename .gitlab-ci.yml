@@ -24,13 +24,12 @@ build:
     - >-
       cd ${CI_PROJECT_DIR};
       export ubuntu_packages=$(cat requirements/Ubuntu);
-      export r_packages=$(cat requirements/R);
-      echo "${CI_REGISTRY_IMAGE}/$(echo ${r_version} | sed 's/.*\///')"
-# - >-
-#   /kaniko/executor
-#   --context "./"
-#   --dockerfile "./Dockerfile"
-#   --destination "${CI_REGISTRY_IMAGE}/$(echo ${r_version} | sed 's/.*\///')"
-#   --build-arg "r_version"="${r_version}"
-#   --build-arg "ubuntu_packages"="${ubuntu_packages}"
-#   --build-arg "r_packages"="${r_packages}"
+      export r_packages=$(cat requirements/R)
+    - >-
+      /kaniko/executor
+      --context "./"
+      --dockerfile "./Dockerfile"
+      --destination "${CI_REGISTRY_IMAGE}/$(echo ${r_version} | sed 's/.*\///')"
+      --build-arg "r_version"="${r_version}"
+      --build-arg "ubuntu_packages"="${ubuntu_packages}"
+      --build-arg "r_packages"="${r_packages}"
