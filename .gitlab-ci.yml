@@ -1,3 +1,6 @@
+variables:
+  r_version: r-base:latest
+
 stages:
   - build
 
@@ -17,15 +20,17 @@ build:
                   }
               }
       }" \
-      > /kaniko/.docker/config.json;
+      > /kaniko/.docker/config.json
+    - >-
       cd ${CI_PROJECT_DIR};
-      export ubuntu_packages=$(cat requirements/Ubuntu);
-      export r_packages=$(cat requirements/R);
-      cat /kaniko/.docker/config.json;
     - >-
       /kaniko/executor
       --context "./"
       --dockerfile "./Dockerfile"
-      --destination "${CI_REGISTRY_IMAGE}"
+      --destination "${CI_REGISTRY_IMAGE}/${r_version}"
+      --build-arg "r_version"="${r_version}"
       --build-arg "ubuntu_packages"="${ubuntu_packages}"
       --build-arg "r_packages"="${r_packages}"
+
+# export ubuntu_packages=$(cat requirements/Ubuntu);
+# export r_packages=$(cat requirements/R)
