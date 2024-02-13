@@ -1,7 +1,7 @@
 
 
 
-ARG r_version="r-base:latest"
+ARG r_version="r-ver:latest"
 ARG ubuntu_packages=""
 ARG r_packages="data.table"
 
