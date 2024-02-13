@@ -23,6 +23,8 @@ build:
       > /kaniko/.docker/config.json
     - >-
       cd ${CI_PROJECT_DIR};
+      export ubuntu_packages=$(cat requirements/Ubuntu);
+      export r_packages=$(cat requirements/R)
     - >-
       /kaniko/executor
       --context "./"
@@ -31,6 +33,3 @@ build:
       --build-arg "r_version"="${r_version}"
       --build-arg "ubuntu_packages"="${ubuntu_packages}"
       --build-arg "r_packages"="${r_packages}"
-
-# export ubuntu_packages=$(cat requirements/Ubuntu);
-# export r_packages=$(cat requirements/R)
