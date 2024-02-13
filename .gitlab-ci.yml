@@ -29,7 +29,7 @@ build:
       /kaniko/executor
       --context "./"
       --dockerfile "./Dockerfile"
-      --destination "${CI_REGISTRY_IMAGE}/${r_version}"
+      --destination "${CI_REGISTRY_IMAGE}/$(echo ${r_version} | sed 's/.*\///')"
       --build-arg "r_version"="${r_version}"
       --build-arg "ubuntu_packages"="${ubuntu_packages}"
       --build-arg "r_packages"="${r_packages}"
