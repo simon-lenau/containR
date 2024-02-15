@@ -21,11 +21,12 @@ fi
 if [ -z ${OUTDIR} ]; then
     export OUTDIR=${WORKDIR}output/
 fi
+
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
 # ============================ > Create folders < ============================ #
-mkdir -p ${WORKDIR}
-mkdir -p ${OUTDIR}
+mkdir -p ${WORKDIR} || echo "Creating ${WORKDIR} failed!"
+mkdir -p ${OUTDIR} || echo "Creating ${OUTDIR} failed!"
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
 # ============= > Copy global .Rprofile and add path messages < ============== #

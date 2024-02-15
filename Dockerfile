@@ -1,6 +1,5 @@
 
 
-
 ARG r_version="r-base:latest"
 ARG ubuntu_packages=""
 ARG r_packages="data.table"
@@ -42,13 +41,9 @@ RUN if [ -n "${ubuntu_packages}" ]; then \
     (sed -i 's/^/\t/' ubuntu_packages.log && cat ubuntu_packages.log && exit 1); \
     fi
 
-
-
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
-
 # ============================== > R packages < ============================== #
-
 
 RUN if [ -n "${r_packages}" ]; then \ 
     echo "Attempting to install r_packages:"; \
