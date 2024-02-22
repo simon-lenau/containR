@@ -2,16 +2,18 @@ variables:
   r_version: rocker/r-ver:latest
 
 stages:
-  - build
+  - r-container-build
 
 build:
-  stage: build
-  tags:
-    - css
-    - largedisk
+  stage: r-container-build
   image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
+  rules:
+    - changes:
+        paths:
+          - *.md
+        when: never
   script:
     - >-
       mkdir -p /kaniko/.docker;
