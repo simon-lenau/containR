@@ -4,7 +4,7 @@ variables:
 stages:
   - r-container-build
 
-build:
+r-container-build:
   stage: r-container-build
   image:
     name: gcr.io/kaniko-project/executor:debug
