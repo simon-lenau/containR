@@ -12,8 +12,11 @@ r-container-build:
   rules:
     - changes:
         paths:
-          - *.md
-        when: never
+          - requirements/*
+          - R/*
+          - Dockerfile
+          - .gitlab-ci.yml
+          - .entrypoint.sh
   script:
     - >-
       mkdir -p /kaniko/.docker;
