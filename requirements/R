@@ -2,6 +2,7 @@ data.table
 ggnewscale
 ggplot2
 parallel
+rstudioapi
 s2
 sf
 spatstat
