@@ -1,5 +1,5 @@
 variables:
-  r_version: rocker/r-ver:latest
+  r_version: rocker/r-ver:4.3.2
 
 stages:
   - r-container-build
@@ -37,6 +37,7 @@ r-container-build:
       /kaniko/executor
       --context "./"
       --dockerfile "./Dockerfile"
+      --destination "${CI_REGISTRY_IMAGE}/$(echo ${r_version} | sed 's/.*\///' | sed 's/\:.*//')"latest"
       --destination "${CI_REGISTRY_IMAGE}/$(echo ${r_version} | sed 's/.*\///')"
       --build-arg "r_version"="${r_version}"
       --build-arg "ubuntu_packages"="${ubuntu_packages}"
