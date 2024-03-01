@@ -31,31 +31,31 @@ RUN mkdir -p /.R/
 COPY R/Makevars /.R/
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
-# # =========================== > Ubuntu Packages < ============================ #
+# =========================== > Ubuntu Packages < ============================ #
 
-# RUN if [ -n "${ubuntu_packages}" ]; then \
-#     echo "Attempting to install ubuntu_packages:"; \
-#     printf "\t - %s\n" ${ubuntu_packages}; \
-#     (apt-get update -y && apt-get install -y ${ubuntu_packages}) > ubuntu_packages.log 2>&1 && \
-#     (echo "... successful!" && rm -rf ubuntu_packages.log) || \
-#     (sed -i 's/^/\t/' ubuntu_packages.log && cat ubuntu_packages.log && exit 1); \
-#     fi
+RUN if [ -n "${ubuntu_packages}" ]; then \
+    echo "Attempting to install ubuntu_packages:"; \
+    printf "\t - %s\n" ${ubuntu_packages}; \
+    (apt-get update -y && apt-get install -y ${ubuntu_packages}) > ubuntu_packages.log 2>&1 && \
+    (echo "... successful!" && rm -rf ubuntu_packages.log) || \
+    (sed -i 's/^/\t/' ubuntu_packages.log && cat ubuntu_packages.log && exit 1); \
+    fi
 
-# # ────────────────────────────────── <end> ─────────────────────────────────── #
+# ────────────────────────────────── <end> ─────────────────────────────────── #
 
-# # ============================== > R packages < ============================== #
+# ============================== > R packages < ============================== #
 
-# RUN if [ -n "${r_packages}" ]; then \ 
-#     echo "Attempting to install r_packages:"; \
-#     printf "\t - %s\n" ${r_packages}; \
-#     Rscript /install_missing_packages.R ${r_packages} > r_packages.log 2>&1 && \
-#     (echo "... successful!" && rm -rf r_packages.log) || \
-#     (sed -i 's/^/\t/' r_packages.log && cat r_packages.log && exit 1); \
-#     fi
+RUN if [ -n "${r_packages}" ]; then \ 
+    echo "Attempting to install r_packages:"; \
+    printf "\t - %s\n" ${r_packages}; \
+    Rscript /install_missing_packages.R ${r_packages} > r_packages.log 2>&1 && \
+    (echo "... successful!" && rm -rf r_packages.log) || \
+    (sed -i 's/^/\t/' r_packages.log && cat r_packages.log && exit 1); \
+    fi
 
-# RUN rm -f /install_missing_packages.R 
+RUN rm -f /install_missing_packages.R 
 
-# # ────────────────────────────────── <end> ─────────────────────────────────── #
+# ────────────────────────────────── <end> ─────────────────────────────────── #
 
 # =============== > Set entrypoint script & default command < ================ #
 
