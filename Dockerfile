@@ -16,29 +16,31 @@ ARG ubuntu_packages
 ARG r_packages
 
 ENV \
-    R_VERSION=${r_version}
+    R_VERSION=${r_version} \
+    CONTAINR_DIR=/containr_scripts
 
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
-# ==================== > Create default home directory < ===================== #
+# ========================== > Create directories < ========================== #
+RUN mkdir -p ${CONTAINR_DIR}
 RUN mkdir -p ${HOME}
+RUN mkdir -p /.R/
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
-# ============================ > R setup files < ============================= #
+# ======================== > Copy containr scripts < ========================= #
+COPY containr_setup/ ${CONTAINR_DIR}/
+# ────────────────────────────────── <end> ─────────────────────────────────── #
+
+
+# ==================== > Copy R settings into container < ==================== #
 COPY R/.Rprofile /
-COPY R/install_missing_packages.R /
-RUN mkdir -p /.R/
 COPY R/Makevars /.R/
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
 # =========================== > Ubuntu Packages < ============================ #
 
 RUN if [ -n "${ubuntu_packages}" ]; then \
-    echo "Attempting to install ubuntu_packages:"; \
-    printf "\t - %s\n" ${ubuntu_packages}; \
-    (apt-get update -y && apt-get install -y ${ubuntu_packages}) > ubuntu_packages.log 2>&1 && \
-    (echo "... successful!" && rm -rf ubuntu_packages.log) || \
-    (sed -i 's/^/\t/' ubuntu_packages.log && cat ubuntu_packages.log && exit 1); \
+    ${CONTAINR_DIR}/install_pkgs "${ubuntu_packages}" \
     fi
 
 # ────────────────────────────────── <end> ─────────────────────────────────── #
@@ -46,24 +48,18 @@ RUN if [ -n "${ubuntu_packages}" ]; then \
 # ============================== > R packages < ============================== #
 
 RUN if [ -n "${r_packages}" ]; then \ 
-    echo "Attempting to install r_packages:"; \
-    printf "\t - %s\n" ${r_packages}; \
-    Rscript /install_missing_packages.R ${r_packages} > r_packages.log 2>&1 && \
-    (echo "... successful!" && rm -rf r_packages.log) || \
-    (sed -i 's/^/\t/' r_packages.log && cat r_packages.log && exit 1); \
+    ${CONTAINR_DIR}/install_Rpkgs "${r_packages}" \
     fi
 
-RUN rm -f /install_missing_packages.R 
 
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
 # =============== > Set entrypoint script & default command < ================ #
 
-COPY .entrypoint.sh /
 
-ENTRYPOINT ["/.entrypoint.sh"]
+ENTRYPOINT ["${CONTAINR_DIR}/entrypoint"]
 
-CMD ["bash"]
+CMD ["/bin/bash"]
 
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 

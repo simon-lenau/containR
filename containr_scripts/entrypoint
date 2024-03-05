@@ -16,10 +16,10 @@ fi
 # ======== > Define some default folders if they are not specified < ========= #
 
 if [ -z ${WORKDIR} ]; then
-    export WORKDIR=/DefaultProject/
+    export WORKDIR=/Project_Source/
 fi
 if [ -z ${OUTDIR} ]; then
-    export OUTDIR=${WORKDIR}output/
+    export OUTDIR=/Project_Output/
 fi
 
 # ────────────────────────────────── <end> ─────────────────────────────────── #
@@ -31,13 +31,14 @@ mkdir -p ${OUTDIR} || echo "Creating ${OUTDIR} failed!"
 
 # ============= > Copy global .Rprofile and add path messages < ============== #
 
-copy_rprofile() {
+function copy_rprofile {
     # If .Rprofile does not exist in folder
     if [ ! -f ${1}/.Rprofile ]; then
         # # Copy /.Rprofile to folder
         # cp /.Rprofile ${1}/
         # # Change log message in .Rprofile to contain folder
         # sed -i 's|\(Loading\s*\).*\/\(.Rprofile\)|\1'"${1}"'\2|' ${1}/.Rprofile
+
         # Create symbolic link in folder
         ln -s /.Rprofile ${1}/.Rprofile
     fi
