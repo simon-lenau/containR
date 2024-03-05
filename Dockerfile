@@ -40,7 +40,7 @@ COPY R/Makevars /.R/
 # =========================== > Ubuntu Packages < ============================ #
 
 RUN if [ -n "${ubuntu_packages}" ]; then \
-    ${CONTAINR_DIR}/install_pkgs "${ubuntu_packages}" \
+    ${CONTAINR_DIR}/install_pkgs "${ubuntu_packages}"; \
     fi
 
 # ────────────────────────────────── <end> ─────────────────────────────────── #
@@ -48,7 +48,7 @@ RUN if [ -n "${ubuntu_packages}" ]; then \
 # ============================== > R packages < ============================== #
 
 RUN if [ -n "${r_packages}" ]; then \ 
-    ${CONTAINR_DIR}/install_Rpkgs "${r_packages}" \
+    ${CONTAINR_DIR}/install_Rpkgs "${r_packages}"; \
     fi
 
 
