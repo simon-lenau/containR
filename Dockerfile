@@ -56,7 +56,7 @@ RUN if [ -n "${r_packages}" ]; then \
 
 # =============== > Set entrypoint script & default command < ================ #
 
-RUN echo "A"
+RUN echo "B"
 ENTRYPOINT ["${CONTAINR_DIR}/entrypoint"]
 
 CMD ["/bin/bash"]
