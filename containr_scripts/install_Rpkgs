@@ -2,6 +2,6 @@
 echo "Attempting to install R packages:"
 printf "\t - %s\n" ${@}
 
-Rscript ${CONTAINR_SETUP}/install_Rpkgs.R ${@} >r_packages.log 2>&1 &&
+Rscript ./install_Rpkgs.R ${@} >r_packages.log 2>&1 &&
     (echo "... successful!" && rm -rf r_packages.log) ||
     (sed -i 's/^/\t/' r_packages.log && cat r_packages.log && exit 1)
