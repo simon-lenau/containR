@@ -40,7 +40,7 @@ function copy_rprofile {
         # sed -i 's|\(Loading\s*\).*\/\(.Rprofile\)|\1'"${1}"'\2|' ${1}/.Rprofile
 
         # Create symbolic link in folder
-        ln -s /.Rprofile ${1}/.Rprofile
+        ln -s /.Rprofile ${1}/.Rprofile 2> /dev/null || echo ""
     fi
 }
 

@@ -37,17 +37,12 @@ COPY R/.Rprofile /
 COPY R/Makevars /.R/
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
-# =========================== > Ubuntu Packages < ============================ #
+# ========================= > Install dependencies < ========================= #
 
 RUN if [ -n "${ubuntu_packages}" ]; then \
     ${CONTAINR_DIR}/install_pkgs "${ubuntu_packages}"; \
-    fi
-
-# ────────────────────────────────── <end> ─────────────────────────────────── #
-
-# ============================== > R packages < ============================== #
-
-RUN if [ -n "${r_packages}" ]; then \ 
+    fi; \
+    if [ -n "${r_packages}" ]; then \ 
     ${CONTAINR_DIR}/install_Rpkgs "${r_packages}"; \
     fi
 
@@ -56,8 +51,9 @@ RUN if [ -n "${r_packages}" ]; then \
 
 # =============== > Set entrypoint script & default command < ================ #
 
-RUN echo "B"
-ENTRYPOINT ["${CONTAINR_DIR}/entrypoint"]
+RUN ln -s "${CONTAINR_DIR}/entrypoint" "/.entrypoint"
+
+ENTRYPOINT [".entrypoint"]
 
 CMD ["/bin/bash"]
 
