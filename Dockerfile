@@ -53,7 +53,7 @@ RUN if [ -n "${ubuntu_packages}" ]; then \
 
 RUN ln -s "${CONTAINR_DIR}/entrypoint" "/.entrypoint"
 
-ENTRYPOINT [".entrypoint"]
+ENTRYPOINT ["/.entrypoint"]
 
 CMD ["/bin/bash"]
 
