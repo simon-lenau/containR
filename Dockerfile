@@ -36,13 +36,12 @@ COPY R/Makevars /.R/
 
 # ========================= > Install dependencies < ========================= #
 
-# RUN if [ -n "${ubuntu_packages}" ]; then \
-#     ${CONTAINR_DIR}/install_pkgs "${ubuntu_packages}"; \
-#     fi; \
-#     \
-#     if [ -n "${r_packages}" ]; then \
-#     ${CONTAINR_DIR}/install_Rpkgs "${r_packages}"; \
-#     fi
+RUN if [ -n "${ubuntu_packages}" ]; then \
+    ${CONTAINR_DIR}/install_pkgs "${ubuntu_packages}"; \
+    fi; \
+    if [ -n "${r_packages}" ]; then \
+    ${CONTAINR_DIR}/install_Rpkgs "${r_packages}"; \
+    fi
 
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
