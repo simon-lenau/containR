@@ -1,5 +1,14 @@
 #!/bin/bash
 
+printf "%s\n" "Running entrypoint from"
+file="${BASH_SOURCE[0]}"
+if [[ "${file}" != "0" ]]; then
+    printf "\t%s" "$(readlink -f "$file")"
+else
+    printf "\t%s" "<entrypoint file unknown>"
+fi
+printf "\n"
+
 # =========================== > Environment File < =========================== #
 # ┌┌────────────────────────────────────────────────────────────────────────┐┐ #
 # ││ This will check for an environment file and source it if it is there   ││ #
