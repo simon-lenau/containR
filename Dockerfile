@@ -1,3 +1,5 @@
+
+
 ARG r_version="r-base:latest"
 ARG ubuntu_packages=""
 ARG r_packages="data.table"
@@ -29,6 +31,7 @@ RUN mkdir -p /.R/
 COPY containr_scripts/ ${CONTAINR_DIR}/
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
+
 # ==================== > Copy R settings into container < ==================== #
 COPY R/.Rprofile /
 COPY R/Makevars /.R/
@@ -39,16 +42,18 @@ COPY R/Makevars /.R/
 RUN if [ -n "${ubuntu_packages}" ]; then \
     ${CONTAINR_DIR}/install_pkgs "${ubuntu_packages}"; \
     fi; \
-    if [ -n "${r_packages}" ]; then \
+    \
+    if [ -n "${r_packages}" ]; then \ 
     ${CONTAINR_DIR}/install_Rpkgs "${r_packages}"; \
     fi
+
 
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
 # =============== > Set entrypoint script & default command < ================ #
 
 RUN \
-    ln -s "${CONTAINR_DIR}/entrypoint" "/.entrypoint" &&
+    ln -s "${CONTAINR_DIR}/entrypoint" "/.entrypoint" && \ 
     chmod a+rwx "/.entrypoint"
 
 ENTRYPOINT ["/.entrypoint"]
@@ -56,3 +61,4 @@ ENTRYPOINT ["/.entrypoint"]
 CMD ["/bin/bash"]
 
 # ────────────────────────────────── <end> ─────────────────────────────────── #
+
