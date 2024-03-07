@@ -39,19 +39,22 @@ COPY R/Makevars /.R/
 
 # ========================= > Install dependencies < ========================= #
 
-RUN if [ -n "${ubuntu_packages}" ]; then \
-    ${CONTAINR_DIR}/install_pkgs "${ubuntu_packages}"; \
-    fi; \
-    if [ -n "${r_packages}" ]; then \ 
-    ${CONTAINR_DIR}/install_Rpkgs "${r_packages}"; \
-    fi
+# RUN if [ -n "${ubuntu_packages}" ]; then \
+#     ${CONTAINR_DIR}/install_pkgs "${ubuntu_packages}"; \
+#     fi; \
+#     \
+#     if [ -n "${r_packages}" ]; then \ 
+#     ${CONTAINR_DIR}/install_Rpkgs "${r_packages}"; \
+#     fi
 
 
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
 # =============== > Set entrypoint script & default command < ================ #
 
-RUN ln -s "${CONTAINR_DIR}/entrypoint" "/.entrypoint"
+RUN \
+    ln -s "${CONTAINR_DIR}/entrypoint" "/.entrypoint" && \ 
+    chmod a+rwx "/.entrypoint"
 
 ENTRYPOINT ["/.entrypoint"]
 
