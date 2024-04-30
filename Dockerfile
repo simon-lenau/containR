@@ -5,6 +5,8 @@ ARG ubuntu_packages=""
 ARG r_packages="data.table"
 ARG workdir="/WORKDIR/"
 ARG outdir="/OUTDIR/"
+ARG workdir="/WORKDIR/"
+ARG outdir="/OUTDIR/"
 
 # =========================== > Base environment < =========================== #
 
@@ -16,6 +18,8 @@ SHELL ["/bin/bash", "-c"]
 ARG r_version
 ARG ubuntu_packages
 ARG r_packages
+ARG workdir
+ARG outdir
 ARG workdir
 ARG outdir
 
