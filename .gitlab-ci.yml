@@ -16,7 +16,7 @@ r-container-build:
           - R/*
           - Dockerfile
           - .gitlab-ci.yml
-          - /containr_scripts/entrypoint
+          - containr_scripts/entrypoint
   script:
     - >-
       mkdir -p /kaniko/.docker;
