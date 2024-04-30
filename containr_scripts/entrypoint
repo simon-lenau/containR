@@ -1,14 +1,28 @@
 #!/bin/bash
 
-env > /entrypoint.log
+# # =========================== > Environment File < =========================== #
+# # ┌┌────────────────────────────────────────────────────────────────────────┐┐ #
+# # ││ This will check for an environment file and source it if it is there   ││ #
+# # └└────────────────────────────────────────────────────────────────────────┘┘ #
+
+# CONTAINER_ENV_FILE=/.env
+
+# if [ -f ${CONTAINER_ENV_FILE} ]; then
+#     source ${CONTAINER_ENV_FILE}
+# fi
+
+# # ────────────────────────────────── <end> ─────────────────────────────────── #
+
+WORKDIR="${1}"
+OUTDIR="${2}"
 
 # ======== > Define some default folders if they are not specified < ========= #
 
 if [ -z ${WORKDIR} ]; then
-    export WORKDIR="${WORKDIR_DEFAULT}"
+    export WORKDIR=${WORKDIR_DEFAULT}
 fi
 if [ -z ${OUTDIR} ]; then
-    export OUTDIR="${OUTDIR_DEFAULT}"
+    export OUTDIR=${OUTDIR_DEFAULT}
 fi
 
 # ────────────────────────────────── <end> ─────────────────────────────────── #

@@ -73,7 +73,7 @@ RUN \
     ln -s "${CONTAINR_DIR}/entrypoint" "/.entrypoint" && \ 
     chmod a+rwx "/.entrypoint"
 
-ENTRYPOINT ["/.entrypoint"]
+ENTRYPOINT "/.entrypoint"
 
 CMD ["/bin/bash"]
 
