@@ -61,8 +61,7 @@ RUN \
     printf "%s\n" \
     "export WORKDIR=${workdir}" \
     "export OUTDIR=${outdir}" \
-    > /.default_env && \
-    echo ".env file:" && cat /.default_env
+    > /.default_env
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
 

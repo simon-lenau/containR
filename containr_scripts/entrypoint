@@ -1,53 +1,52 @@
-#!/bin/bash
+# #!/bin/bash
 
-# # =========================== > Environment File < =========================== #
-# # ┌┌────────────────────────────────────────────────────────────────────────┐┐ #
-# # ││ This will check for an environment file and source it if it is there   ││ #
-# # └└────────────────────────────────────────────────────────────────────────┘┘ #
+# # # =========================== > Environment File < =========================== #
+# # # ┌┌────────────────────────────────────────────────────────────────────────┐┐ #
+# # # ││ This will check for an environment file and source it if it is there   ││ #
+# # # └└────────────────────────────────────────────────────────────────────────┘┘ #
 
-CONTAINER_DEFAULT_ENV_FILE=/.default_env
-CONTAINER_ENV_FILE=/.env
+# CONTAINER_DEFAULT_ENV_FILE=/.default_env
+# CONTAINER_ENV_FILE=/.env
 
-# Source default environment, then
-# potential custom environment
-source ${CONTAINER_DEFAULT_ENV_FILE}
+# # Source default environment, then
+# # potential custom environment
+# source ${CONTAINER_DEFAULT_ENV_FILE}
 
-if [ -f ${CONTAINER_ENV_FILE} ]; then
-    source ${CONTAINER_ENV_FILE}
-fi
+# if [ -f ${CONTAINER_ENV_FILE} ]; then
+#     source ${CONTAINER_ENV_FILE}
+# fi
+
+# # # ────────────────────────────────── <end> ─────────────────────────────────── #
+
+# # ============================ > Create folders < ============================ #
+# mkdir -p ${WORKDIR} || echo "Creating ${WORKDIR} failed!"
+# mkdir -p ${OUTDIR} || echo "Creating ${OUTDIR} failed!"
+# # ────────────────────────────────── <end> ─────────────────────────────────── #
+
+# # ============= > Copy global .Rprofile and add path messages < ============== #
+
+# function copy_rprofile {
+#     # If .Rprofile does not exist in folder
+#     if [ ! -f ${1}/.Rprofile ]; then
+#         # # Copy /.Rprofile to folder
+#         # cp /.Rprofile ${1}/
+#         # # Change log message in .Rprofile to contain folder
+#         # sed -i 's|\(Loading\s*\).*\/\(.Rprofile\)|\1'"${1}"'\2|' ${1}/.Rprofile
+
+#         # Create symbolic link in folder
+#         ln -s /.Rprofile ${1}/.Rprofile 2>/dev/null || echo ""
+#     fi
+# }
+
+# copy_rprofile ${HOME}/
+# copy_rprofile ${WORKDIR}
 
 # # ────────────────────────────────── <end> ─────────────────────────────────── #
 
+# # ===================== > Enter projects input folder < ====================== #
+# cd ${WORKDIR}
+# # ────────────────────────────────── <end> ─────────────────────────────────── #
 
-# ============================ > Create folders < ============================ #
-mkdir -p ${WORKDIR} || echo "Creating ${WORKDIR} failed!"
-mkdir -p ${OUTDIR} || echo "Creating ${OUTDIR} failed!"
-# ────────────────────────────────── <end> ─────────────────────────────────── #
-
-# ============= > Copy global .Rprofile and add path messages < ============== #
-
-function copy_rprofile {
-    # If .Rprofile does not exist in folder
-    if [ ! -f ${1}/.Rprofile ]; then
-        # # Copy /.Rprofile to folder
-        # cp /.Rprofile ${1}/
-        # # Change log message in .Rprofile to contain folder
-        # sed -i 's|\(Loading\s*\).*\/\(.Rprofile\)|\1'"${1}"'\2|' ${1}/.Rprofile
-
-        # Create symbolic link in folder
-        ln -s /.Rprofile ${1}/.Rprofile 2>/dev/null || echo ""
-    fi
-}
-
-copy_rprofile ${HOME}/
-copy_rprofile ${WORKDIR}
-
-# ────────────────────────────────── <end> ─────────────────────────────────── #
-
-# ===================== > Enter projects input folder < ====================== #
-cd ${WORKDIR}
-# ────────────────────────────────── <end> ─────────────────────────────────── #
-
-# ========== > Execute the command(s) passed as arguments by user < ========== #
-exec "${@}"
-# ────────────────────────────────── <end> ─────────────────────────────────── #
+# # ========== > Execute the command(s) passed as arguments by user < ========== #
+exec "$@"
+# # ────────────────────────────────── <end> ─────────────────────────────────── #
