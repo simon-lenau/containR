@@ -9,11 +9,11 @@ FROM ${r_version}
 SHELL ["/bin/bash", "-c"]
 
 # Make arguments available as environment variables in container
-ARG r_version
-ARG ubuntu_packages=""
-ARG r_packages="data.table"
-ARG workdir="/WORKDIR/"
-ARG outdir="/OUTDIR/"
+ARG r_version \
+    ubuntu_packages="" \
+    r_packages="data.table" \
+    workdir="/WORKDIR/" \
+    outdir="/OUTDIR/"
 
 ENV \
     R_VERSION=${r_version} \
