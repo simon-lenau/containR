@@ -18,8 +18,10 @@ ARG outdir="/OUTDIR/"
 ENV \
     R_VERSION=${r_version} \
     CONTAINR_DIR="/containr_scripts"  \
-    WORKDIR="${workdir}" \
-    OUTDIR="${outdir}"
+    WORKDIR_DEFAULT="${workdir}" \
+    OUTDIR_DEFAULT="${outdir}" \
+    WORKDIR="" \
+    OUTDIR=""
 
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
@@ -73,7 +75,7 @@ RUN \
     ln -s "${CONTAINR_DIR}/entrypoint" "/.entrypoint" && \ 
     chmod a+rwx "/.entrypoint"
 
-ENTRYPOINT "/.entrypoint" $WORKDIR $OUTDIR
+ENTRYPOINT "/.entrypoint" "$WORKDIR" "$OUTDIR"
 
 CMD ["/bin/bash"]
 
