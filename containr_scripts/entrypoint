@@ -8,24 +8,16 @@
 CONTAINER_DEFAULT_ENV_FILE=/.default_env
 CONTAINER_ENV_FILE=/.env
 
+# Source default environment, then
+# potential custom environment
+source ${CONTAINER_DEFAULT_ENV_FILE}
+
 if [ -f ${CONTAINER_ENV_FILE} ]; then
     source ${CONTAINER_ENV_FILE}
-elif [ -f ${CONTAINER_DEFAULT_ENV_FILE} ]; then
-    source ${CONTAINER_DEFAULT_ENV_FILE}
 fi
 
 # # ────────────────────────────────── <end> ─────────────────────────────────── #
 
-# ======== > Define some default folders if they are not specified < ========= #
-
-if [ -z ${WORKDIR} ]; then
-    export WORKDIR=/WORKDIR/
-fi
-if [ -z ${OUTDIR} ]; then
-    export OUTDIR=/OUTDIR/
-fi
-
-# ────────────────────────────────── <end> ─────────────────────────────────── #
 
 # ============================ > Create folders < ============================ #
 mkdir -p ${WORKDIR} || echo "Creating ${WORKDIR} failed!"

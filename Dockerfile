@@ -61,9 +61,8 @@ RUN \
     printf "%s\n" \
     "export WORKDIR=${workdir}" \
     "export OUTDIR=${outdir}" \
-    > /.default_env
-
-RUN echo ".env file:" && cat /.default_env
+    > /.default_env && \
+    echo ".env file:" && cat /.default_env
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
 
@@ -73,7 +72,7 @@ RUN \
     ln -s "${CONTAINR_DIR}/entrypoint" "/.entrypoint" && \ 
     chmod a+rwx "/.entrypoint"
 
-# ENTRYPOINT "/.entrypoint" 
+ENTRYPOINT "/.entrypoint" 
 
 CMD ["/bin/bash"]
 
