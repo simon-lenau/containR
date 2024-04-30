@@ -3,6 +3,8 @@
 ARG r_version="r-base:latest"
 ARG ubuntu_packages=""
 ARG r_packages="data.table"
+ARG workdir="/WORKDIR/"
+ARG outdir="/OUTDIR/"
 
 # =========================== > Base environment < =========================== #
 
@@ -14,10 +16,12 @@ SHELL ["/bin/bash", "-c"]
 ARG r_version
 ARG ubuntu_packages
 ARG r_packages
+ARG workdir
+ARG outdir
 
 ENV \
     R_VERSION=${r_version} \
-    CONTAINR_DIR=/containr_scripts
+    CONTAINR_DIR=/containr_scripts 
 
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
@@ -49,6 +53,21 @@ RUN if [ -n "${ubuntu_packages}" ]; then \
 
 
 # ────────────────────────────────── <end> ─────────────────────────────────── #
+
+# ============================== > .env file < =============================== #
+
+# ┌┌────────────────────────────────────────────────────────────────────────┐┐ #
+# ││ This file is sourced by the entrypoint script                          ││ #
+# └└────────────────────────────────────────────────────────────────────────┘┘ #
+RUN \ 
+    printf "%s\n" \
+    "export WORKDIR=${workdir}" \
+    "export OUTDIR=${outdir}" \
+    > /.env
+
+RUN echo ".env file:" && cat /.env
+# ────────────────────────────────── <end> ─────────────────────────────────── #
+
 
 # =============== > Set entrypoint script & default command < ================ #
 

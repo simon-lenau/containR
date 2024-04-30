@@ -1,28 +1,28 @@
 #!/bin/bash
 
-# =========================== > Environment File < =========================== #
-# ┌┌────────────────────────────────────────────────────────────────────────┐┐ #
-# ││ This will check for an environment file and source it if it is there   ││ #
-# └└────────────────────────────────────────────────────────────────────────┘┘ #
+# # =========================== > Environment File < =========================== #
+# # ┌┌────────────────────────────────────────────────────────────────────────┐┐ #
+# # ││ This will check for an environment file and source it if it is there   ││ #
+# # └└────────────────────────────────────────────────────────────────────────┘┘ #
 
-CONTAINER_ENV_FILE=/.env
+# CONTAINER_ENV_FILE=/.env
 
-if [ -f ${CONTAINER_ENV_FILE} ]; then
-    source ${CONTAINER_ENV_FILE}
-fi
+# if [ -f ${CONTAINER_ENV_FILE} ]; then
+#     source ${CONTAINER_ENV_FILE}
+# fi
 
-# ────────────────────────────────── <end> ─────────────────────────────────── #
+# # ────────────────────────────────── <end> ─────────────────────────────────── #
 
-# ======== > Define some default folders if they are not specified < ========= #
+# # ======== > Define some default folders if they are not specified < ========= #
 
-if [ -z ${WORKDIR} ]; then
-    export WORKDIR=/Project_Source/
-fi
-if [ -z ${OUTDIR} ]; then
-    export OUTDIR=/Project_Output/
-fi
+# if [ -z ${WORKDIR} ]; then
+#     export WORKDIR=/Project_Source/
+# fi
+# if [ -z ${OUTDIR} ]; then
+#     export OUTDIR=/Project_Output/
+# fi
 
-# ────────────────────────────────── <end> ─────────────────────────────────── #
+# # ────────────────────────────────── <end> ─────────────────────────────────── #
 
 # ============================ > Create folders < ============================ #
 mkdir -p ${WORKDIR} || echo "Creating ${WORKDIR} failed!"
