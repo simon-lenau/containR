@@ -13,8 +13,8 @@
 
 # # ────────────────────────────────── <end> ─────────────────────────────────── #
 
-WORKDIR="${1}"
-OUTDIR="${2}"
+export WORKDIR="${1}"
+export OUTDIR="${2}"
 
 # ======== > Define some default folders if they are not specified < ========= #
 
@@ -57,5 +57,5 @@ cd ${WORKDIR}
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
 # ========== > Execute the command(s) passed as arguments by user < ========== #
-exec "$@"
+exec "${@:3}"
 # ────────────────────────────────── <end> ─────────────────────────────────── #
