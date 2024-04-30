@@ -19,9 +19,7 @@ ENV \
     R_VERSION=${r_version} \
     CONTAINR_DIR="/containr_scripts"  \
     WORKDIR_DEFAULT="${workdir}" \
-    OUTDIR_DEFAULT="${outdir}" \
-    WORKDIR="" \
-    OUTDIR=""
+    OUTDIR_DEFAULT="${outdir}"
 
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
