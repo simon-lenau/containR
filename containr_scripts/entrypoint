@@ -5,13 +5,7 @@
 # # ││ This will check for an environment file and source it if it is there   ││ #
 # # └└────────────────────────────────────────────────────────────────────────┘┘ #
 
-CONTAINER_DEFAULT_ENV_FILE=/.default_env
 CONTAINER_ENV_FILE=/.env
-
-# Source default environment, then
-# potential custom environment
-printf "%s" "sourcing $CONTAINER_DEFAULT_ENV_FILE ... "
-source ${CONTAINER_DEFAULT_ENV_FILE} && printf "%s\n" "ok" || printf "%s\n" "failed"
 
 if [ -f ${CONTAINER_ENV_FILE} ]; then
     printf "%s" "sourcing $CONTAINER_ENV_FILE ... "
