@@ -15,21 +15,12 @@
 
 # # ======== > Define some default folders if they are not specified < ========= #
 
-<<<<<<< HEAD
-if [ -z ${WORKDIR} ]; then
-    export WORKDIR=/WORKDIR/
-fi
-if [ -z ${OUTDIR} ]; then
-    export OUTDIR=/OUTDIR/
-fi
-=======
 # if [ -z ${WORKDIR} ]; then
 #     export WORKDIR=/Project_Source/
 # fi
 # if [ -z ${OUTDIR} ]; then
 #     export OUTDIR=/Project_Output/
 # fi
->>>>>>> refs/remotes/origin/main
 
 # # ────────────────────────────────── <end> ─────────────────────────────────── #
 
