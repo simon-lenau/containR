@@ -48,6 +48,10 @@ printf "%s" "entering $WORKDIR ... "
 cd ${WORKDIR} && printf "%s\n" "ok" || printf "%s\n" "failed"
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
-# ========== > Execute the command(s) passed as arguments by user < ========== #
-exec "$@"
+# ================ > Link folders to user's home directory < ================= #
+ln -s $WORKDIR  ${HOME}/$(basename $WORKDIR)
+ln -s $OUTDIR  ${HOME}/$(basename $OUTDIR)
 # ────────────────────────────────── <end> ─────────────────────────────────── #
+
+exec "$@"
+
