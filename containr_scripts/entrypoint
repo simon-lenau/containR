@@ -1,6 +1,8 @@
 #!/bin/bash
 
-
+printf "%s\n" \
+    "WORKDIR: $WORKDIR" \
+    "OUTDIR: $OUTDIR" >"/entrypoint.log"
 
 # ======== > Define some default folders if they are not specified < ========= #
 
