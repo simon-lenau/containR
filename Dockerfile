@@ -17,9 +17,9 @@ ARG outdir="/OUTDIR/"
 
 ENV \
     R_VERSION=${r_version} \
-    CONTAINR_DIR="/containr_scripts"  \
-    WORKDIR_DEFAULT="${workdir}" \
-    OUTDIR_DEFAULT="${outdir}"
+    CONTAINR_DIR="/containr_scripts" \
+    WORKDIR="$workdir" \
+    OUTDIR="$outdir"
 
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
@@ -52,19 +52,19 @@ RUN if [ -n "${ubuntu_packages}" ]; then \
 
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
-# # ============================== > .env file < =============================== #
+# ============================== > .env file < =============================== #
 
-# # ┌┌────────────────────────────────────────────────────────────────────────┐┐ #
-# # ││ This file is sourced by the entrypoint script                          ││ #
-# # └└────────────────────────────────────────────────────────────────────────┘┘ #
-# RUN \ 
-#     printf "%s\n" \
-#     "export WORKDIR=${workdir}" \
-#     "export OUTDIR=${outdir}" \
-#     > /.env
+# ┌┌────────────────────────────────────────────────────────────────────────┐┐ #
+# ││ This file is sourced by the entrypoint script                          ││ #
+# └└────────────────────────────────────────────────────────────────────────┘┘ #
+RUN \ 
+    printf "%s\n" \
+    "export WORKDIR=${workdir}" \
+    "export OUTDIR=${outdir}" \
+    > /.default_env
 
-# RUN echo ".env file:" && cat /.env
-# # ────────────────────────────────── <end> ─────────────────────────────────── #
+RUN echo ".env file:" && cat /.default_env
+# ────────────────────────────────── <end> ─────────────────────────────────── #
 
 
 # =============== > Set entrypoint script & default command < ================ #
