@@ -12,7 +12,7 @@ r-container-build:
   rules:
     - changes:
         paths:
-          - requirements/*
+          - dependencies/*
           - R/*
           - Dockerfile
           - .gitlab-ci.yml
