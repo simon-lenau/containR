@@ -41,6 +41,6 @@ r-container-build:
       --destination "${CI_REGISTRY_IMAGE}/$(echo ${r_version} | sed 's/.*\///')"
       --build-arg "r_version"="${r_version}"
       --build-arg "ubuntu_packages"="${ubuntu_packages}"
-      --build-arg "r_packages"=""
+      --build-arg "r_packages"="${r_packages}"
       --build-arg "workdir"="/${CI_PROJECT_TITLE}/"
       --build-arg "outdir"="/${CI_PROJECT_TITLE}_output/"
