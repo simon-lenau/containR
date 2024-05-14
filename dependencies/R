@@ -1,1 +1,5 @@
 data.table
+ggplot2
+parallel
+rstudioapi
+viridis
