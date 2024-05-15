@@ -44,8 +44,8 @@ copy_rprofile ${WORKDIR} && printf "%s\n" "ok" || printf "%s\n" "failed"
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
 # ================ > Link folders to user's home directory < ================= #
-ln -s $WORKDIR  ${HOME}/$(basename $WORKDIR)
-ln -s $OUTDIR  ${HOME}/$(basename $OUTDIR)
+ln -s $WORKDIR/  ${HOME}/$(basename $WORKDIR)/
+ln -s $OUTDIR/  ${HOME}/$(basename $OUTDIR)/
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
 # ===================== > Enter projects input folder < ====================== #
