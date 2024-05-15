@@ -1,24 +1,32 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# # =========================== > Environment File < =========================== #
-# # ┌┌────────────────────────────────────────────────────────────────────────┐┐ #
-# # ││ This will check for an environment file and source it if it is there   ││ #
-# # └└────────────────────────────────────────────────────────────────────────┘┘ #
+if [ -n "${__containr_entrypoint__}" ]; then return; fi
+export __containr_entrypoint__=true
+
+function __containr_entrypoint_log__ {
+    printf "%-20s %-50s ..." \
+        "${1}" "${2}"
+} 
+
+# =========================== > Environment File < =========================== #
+# ┌┌────────────────────────────────────────────────────────────────────────┐┐ #
+# ││ This will check for an environment file and source it if it is there   ││ #
+# └└────────────────────────────────────────────────────────────────────────┘┘ #
 
 CONTAINER_ENV_FILE=/.env
 
 if [ -f ${CONTAINER_ENV_FILE} ]; then
-    printf "%s" "sourcing $CONTAINER_ENV_FILE ... "
+    __containr_entrypoint_log__ "sourcing" "$CONTAINER_ENV_FILE"
     source ${CONTAINER_ENV_FILE} && printf "%s\n" "ok" || printf "%s\n" "failed"
 fi
 
-# # ────────────────────────────────── <end> ─────────────────────────────────── #
+# ────────────────────────────────── <end> ─────────────────────────────────── #
 
 # ============================ > Create folders < ============================ #
-printf "%s" "creating $WORKDIR ... "
+__containr_entrypoint_log__ "creating" "$WORKDIR"
 mkdir -p ${WORKDIR} && printf "%s\n" "ok" || printf "%s\n" "failed"
 
-printf "%s" "creating $OUTDIR ... "
+__containr_entrypoint_log__ "creating" "$OUTDIR"
 mkdir -p ${OUTDIR} && printf "%s\n" "ok" || printf "%s\n" "failed"
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
@@ -36,9 +44,9 @@ function copy_rprofile {
         ln -s /.Rprofile ${1}/.Rprofile 2>/dev/null || echo ""
     fi
 }
-printf "%s" "copying .Rprofile to $HOME ... "
+__containr_entrypoint_log__ "copying .Rprofile to" "$HOME"
 copy_rprofile ${HOME}/ && printf "%s\n" "ok" || printf "%s\n" "failed"
-printf "%s" "copying .Rprofile to $WORKDIR ... "
+__containr_entrypoint_log__ "copying .Rprofile to" "$WORKDIR"
 copy_rprofile ${WORKDIR} && printf "%s\n" "ok" || printf "%s\n" "failed"
 
 # ────────────────────────────────── <end> ─────────────────────────────────── #
@@ -53,7 +61,7 @@ fi
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
 # ===================== > Enter projects input folder < ====================== #
-printf "%s" "entering ${HOME}/$(basename $WORKDIR) ... "
+__containr_entrypoint_log__ "entering" "${HOME}/$(basename $WORKDIR)"
 cd ${HOME}/$(basename $WORKDIR) && printf "%s\n" "ok" || printf "%s\n" "failed"
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
