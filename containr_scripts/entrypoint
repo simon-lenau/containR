@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-if [ -n "${__containr_entrypoint__}" ]; then return; fi
-export __containr_entrypoint__=true
+if [ -n "${__entrypoint_run__}" ]; then return; fi
+export __entrypoint_run__=true
 
 function __containr_entrypoint_log__ {
-    printf "%-20s %-50s ..." \
-        "${1}" "${2}"
+    printf "%-25s %-50s" \
+        "${1}" "${2} ..."
 } 
 
 # =========================== > Environment File < =========================== #
