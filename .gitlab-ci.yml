@@ -48,22 +48,28 @@ r-container-build:
         }
       }" \
       > /kaniko/.docker/config.json;
-    - cat /kaniko/.docker/config.json;
     # Export package lists
     - >- 
       export ubuntu_packages=$(cat dependencies/Ubuntu 2>/dev/null || return 0);
       export r_packages=$(cat dependencies/R 2>/dev/null || return 0);
-    # Build the container
+    # Determine image information
     - >-
-      /kaniko/executor
-      --context "./"
-      --dockerfile "./Dockerfile"
-      --destination "${CI_REGISTRY_IMAGE}/$(echo ${r_version} | sed 's/.*\///' | sed 's/\:.*//'):latest"
-      --destination "${CI_REGISTRY_IMAGE}/$(echo ${r_version} | sed 's/.*\///')"
-      --destination "simonlenau/containr:$(echo ${r_version} | sed 's/.*\///' | sed 's/\:/_/')"
-      --destination "simonlenau/containr:$(echo ${r_version} | sed 's/.*\///' | sed 's/\:.*//')_latest"
-      --build-arg "r_version"="${r_version}"
-      --build-arg "ubuntu_packages"="${ubuntu_packages}"
-      --build-arg "r_packages"="${r_packages}"
-      --build-arg "workdir"="/${CI_PROJECT_TITLE}/"
-      --build-arg "outdir"="/${CI_PROJECT_TITLE}_output/"
+      export image_name="$(echo ${FROM_IMAGE} | sed 's/.*\///' | sed 's/\:.*$//')";
+      export image_vers="$(echo ${FROM_IMAGE} | sed 's/.*\///' | sed 's/^.*\:\(.*\)$/\1/')";
+    - >-
+      echo "image_name: ${image_name} <";
+      echo "image_vers: ${image_vers} <";
+    # # Build the container
+    # - >-
+    #   /kaniko/executor
+    #   --context "./"
+    #   --dockerfile "./Dockerfile"
+    #   --destination "${CI_REGISTRY_IMAGE}/$(echo ${r_version} | sed 's/.*\///' | sed 's/\:.*//'):latest"
+    #   --destination "${CI_REGISTRY_IMAGE}/$(echo ${r_version} | sed 's/.*\///')"
+    #   --destination "simonlenau/containr:$(echo ${r_version} | sed 's/.*\///' | sed 's/\:/_/')"
+    #   --destination "simonlenau/containr:$(echo ${r_version} | sed 's/.*\///' | sed 's/\:.*//')_latest"
+    #   --build-arg "r_version"="${r_version}"
+    #   --build-arg "ubuntu_packages"="${ubuntu_packages}"
+    #   --build-arg "r_packages"="${r_packages}"
+    #   --build-arg "workdir"="/${CI_PROJECT_TITLE}/"
+    #   --build-arg "outdir"="/${CI_PROJECT_TITLE}_output/"
