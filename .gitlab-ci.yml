@@ -34,6 +34,16 @@ r-container-build:
                 "${CI_REGISTRY_PASSWORD}" | \
               base64 -w 0
               )\"
+          },
+          \"docker.io\":
+          { 
+            \"auth\": 
+              \"$(
+              printf "%s:%s" \
+                "silena" \
+                "dckr_pat_OcPs0Yv044oquOa1ADz0O608lq4" | \
+              base64 -w 0
+              )\"
           }
         }
       }" \
@@ -49,6 +59,7 @@ r-container-build:
       --dockerfile "./Dockerfile"
       --destination "${CI_REGISTRY_IMAGE}/$(echo ${r_version} | sed 's/.*\///' | sed 's/\:.*//'):latest"
       --destination "${CI_REGISTRY_IMAGE}/$(echo ${r_version} | sed 's/.*\///')"
+      --destination "silena/containr/$(echo ${r_version} | sed 's/.*\///')"
       --build-arg "r_version"="${r_version}"
       --build-arg "ubuntu_packages"="${ubuntu_packages}"
       --build-arg "r_packages"="${r_packages}"
