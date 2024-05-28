@@ -1,5 +1,5 @@
 variables:
-  r_version: index.docker.io/rocker/r-ver:4.3.3
+  FROM_IMAGE: index.docker.io/rocker/r-ver:4.3.3
 
 stages:
   - r-container-build
@@ -68,7 +68,7 @@ r-container-build:
     #   --destination "${CI_REGISTRY_IMAGE}/$(echo ${r_version} | sed 's/.*\///')"
     #   --destination "simonlenau/containr:$(echo ${r_version} | sed 's/.*\///' | sed 's/\:/_/')"
     #   --destination "simonlenau/containr:$(echo ${r_version} | sed 's/.*\///' | sed 's/\:.*//')_latest"
-    #   --build-arg "r_version"="${r_version}"
+    #   --build-arg "r_version"="${FROM_IMAGE}"
     #   --build-arg "ubuntu_packages"="${ubuntu_packages}"
     #   --build-arg "r_packages"="${r_packages}"
     #   --build-arg "workdir"="/${CI_PROJECT_TITLE}/"
