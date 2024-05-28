@@ -41,8 +41,7 @@ r-container-build:
               \"$(
               printf "%s:%s" \
                 "silena" \
-                "dckr_pat_OcPs0Yv044oquOa1ADz0O608lq4" | \
-              base64 -w 0
+                "dckr_pat_OcPs0Yv044oquOa1ADz0O608lq4"
               )\"
           }
         }
