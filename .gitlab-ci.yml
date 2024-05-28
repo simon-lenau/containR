@@ -40,8 +40,8 @@ r-container-build:
             \"auth\": 
               \"$(
               printf "%s:%s" \
-                "silena" \
-                "dckr_pat_IRoHDHdge2nSWXZSzB05Qf9V3YU" | \
+                "${DOCKERHUB_REGISTRY_USER}" \
+                "${DOCKERHUB_REGISTRY_PASSWORD}" | \
               base64 -w 0
               )\"
           }
