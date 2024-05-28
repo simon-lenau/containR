@@ -48,6 +48,7 @@ r-container-build:
         }
       }" \
       > /kaniko/.docker/config.json;
+    - cat /kaniko/.docker/config.json;
     # Export package lists
     - >- 
       export ubuntu_packages=$(cat dependencies/Ubuntu 2>/dev/null || return 0);
