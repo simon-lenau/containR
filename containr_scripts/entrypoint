@@ -4,8 +4,9 @@ if [ -n "${__entrypoint_run__}" ]; then return; fi
 export __entrypoint_run__=true
 
 function __containr_entrypoint_log__ {
-    printf "%-25s %-50s" \
-        "${1}" "${2} ..."
+    # printf "%-25s %-50s" \
+    #     "${1}" "${2} ..."
+    :
 } 
 
 # =========================== > Environment File < =========================== #
@@ -53,10 +54,10 @@ copy_rprofile ${WORKDIR} && printf "%s\n" "ok" || printf "%s\n" "failed"
 
 # ================ > Link folders to user's home directory < ================= #
 if [[ ! -d ${HOME}/$(basename $WORKDIR)/ ]]; then
-    ln -s $WORKDIR/ ${HOME}/$(basename $WORKDIR)/
+    ln -s $WORKDIR/ ${HOME}/$(basename $WORKDIR)
 fi
 if [[ ! -d ${HOME}/$(basename $OUTDIR)/ ]]; then
-    ln -s $OUTDIR/ ${HOME}/$(basename $OUTDIR)/
+    ln -s $OUTDIR/ ${HOME}/$(basename $OUTDIR)
 fi
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
