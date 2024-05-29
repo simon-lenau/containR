@@ -69,7 +69,7 @@ r-container-build:
       --destination "${CI_REGISTRY_IMAGE}:latest"
       --destination "${CI_REGISTRY_IMAGE}:${image_vers}"
       --destination "index.docker.io/simonlenau/containr:latest"
-      --destination "index.docker.io/simonlenau/containr:${image_ver}"
+      --destination "index.docker.io/simonlenau/containr:${image_vers}"
       --build-arg "r_version"="${FROM_IMAGE}"
       --build-arg "ubuntu_packages"="${ubuntu_packages}"
       --build-arg "r_packages"="${r_packages}"
