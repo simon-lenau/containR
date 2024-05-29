@@ -59,6 +59,7 @@ r-container-build:
     - >-
       echo "FROM_IMAGE: $FROM_IMAGE";
       echo "image_name: $image_name";
+      echo "image_vers: $image_vers";
       echo "image_tag: $image_tag";
     # # Build the container
     # - >-
