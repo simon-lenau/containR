@@ -37,7 +37,7 @@ a
 and 
 [/`.Rprofile`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/Startup) 
 file for [R](https://www.r-project.org/)
-defined.
+are defined.
 These files are located in [`R/`](R/).
 
 The number of available cores is determined by
