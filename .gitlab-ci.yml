@@ -14,6 +14,7 @@ r-container-build:
         paths:
           - dependencies/*
           - R/*
+          - scripts/*
           - Dockerfile
           - .gitlab-ci.yml
           - containr_scripts/entrypoint
