@@ -1,6 +1,6 @@
 # containR
 
-This is an image for [R](https://www.r-project.org/) based on [rocker/r-ver](https://rocker-project.org/images/versioned/r-ver.html).
+This is a docker image for [R](https://www.r-project.org/) based on [rocker/r-ver](https://rocker-project.org/images/versioned/r-ver.html).
 It adds functionalities to
 
 1. install dependencies while building the container
@@ -10,7 +10,7 @@ It adds functionalities to
     [`data.table`](https://cran.r-project.org/web/packages/data.table/data.table.pdf)
 3. dynamically define and enter a working environment
 
-The containers are available on dockerhub: [simonlenau/containr](https://hub.docker.com/r/simonlenau/containr)
+Docker ontainers are available on dockerhub: [simonlenau/containr](https://hub.docker.com/r/simonlenau/containr)
 
 ## Installation of dependendies
 
@@ -39,7 +39,6 @@ and
 file for [R](https://www.r-project.org/)
 are defined.
 These files are located in [`R/`](R/).
-
 The number of available cores is determined by
 [`nproc`](https://www.gnu.org/software/coreutils/manual/html_node/nproc-invocation.html).
 
@@ -54,9 +53,8 @@ The entrypoint script for the container is
 [scripts/entrypoint](scripts/entrypoint). 
 Its steps are
 
-1. checks whether an environment file `~/.env` or `/.env` exists,
-and sources that file.
-2. create (if not existing) `${WORKDIR}` and `${OUTDIR}`,
+1. If an environment file `~/.env` or `/.env` exists, sources it.
+2. create (if not existing) `${WORKDIR}` and `${OUTDIR}` and
     create symbolic links to these folders in `~/`
-3. Create symbolic links to `/.Rprofile` in `~/` and `${WORKDIR}` 
+3. create symbolic links to `/.Rprofile` in `~/` and `${WORKDIR}` 
 4. `cd` into `${WORKDIR}` 
