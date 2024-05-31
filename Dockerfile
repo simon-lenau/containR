@@ -17,7 +17,7 @@ ARG r_version \
 
 ENV \
     R_VERSION=${r_version} \
-    CONTAINR_DIR="/containr_scripts" \
+    CONTAINR_DIR="/containr" \
     WORKDIR="$workdir" \
     OUTDIR="$outdir"
 
@@ -31,7 +31,7 @@ RUN \
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
 # ======================== > Copy containr scripts < ========================= #
-COPY containr_scripts/ ${CONTAINR_DIR}/
+COPY scripts/ ${CONTAINR_DIR}/
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
 

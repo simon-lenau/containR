@@ -4,21 +4,23 @@ if [ -n "${__entrypoint_run__}" ]; then return; fi
 export __entrypoint_run__=true
 
 function __containr_entrypoint_log__ {
+    # # Uncomment this block to show logging messages
     # printf "%-25s %-50s" \
     #     "${1}" "${2} ..."
     :
-} 
+}
 
 # =========================== > Environment File < =========================== #
 # ┌┌────────────────────────────────────────────────────────────────────────┐┐ #
 # ││ This will check for an environment file and source it if it is there   ││ #
 # └└────────────────────────────────────────────────────────────────────────┘┘ #
 
-CONTAINER_ENV_FILE=/.env
-
-if [ -f ${CONTAINER_ENV_FILE} ]; then
-    __containr_entrypoint_log__ "sourcing" "$CONTAINER_ENV_FILE"
-    source ${CONTAINER_ENV_FILE} && printf "%s\n" "ok" || printf "%s\n" "failed"
+if [ -f ${HOME}/.env ]; then
+    __containr_entrypoint_log__ "sourcing" "${HOME}/.env"
+    source "${HOME}/.env" && printf "%s\n" "ok" || printf "%s\n" "failed"
+elif [ -f /.env ]; then
+    __containr_entrypoint_log__ "sourcing" "/.env"
+    source /.env && printf "%s\n" "ok" || printf "%s\n" "failed"
 fi
 
 # ────────────────────────────────── <end> ─────────────────────────────────── #
