@@ -35,7 +35,7 @@ and
 a
 [`.R/Makevars`](https://cran.r-project.org/doc/manuals/r-devel/R-exts.html#Using-Makevars) 
 and 
-[/`.Rprofile`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/Startup) 
+[`/.Rprofile`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/Startup) 
 file for [R](https://www.r-project.org/)
 are defined.
 These files are located in [`R/`](R/).
