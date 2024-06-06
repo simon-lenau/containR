@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [ -n "${__entrypoint_run__}" ]; then return; fi
+if [ -n "${__entrypoint_run__}" ]; then exit 0; fi
 export __entrypoint_run__=true
 
 
