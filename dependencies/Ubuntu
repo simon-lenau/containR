@@ -1,2 +1,3 @@
 default-jre
+libfontconfig1-dev
 libxml2-dev
