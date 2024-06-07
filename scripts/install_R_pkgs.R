@@ -44,7 +44,11 @@ for (
             repos =
                 "https://cloud.r-project.org",
             dependencies =
-                c("Depends", "Imports", "LinkingTo")
+                c(
+                    "Depends",
+                    "Imports",
+                    "LinkingTo"
+                )
         )
         cat("done\n")
         if (!library(package,

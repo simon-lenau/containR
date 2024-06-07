@@ -1,7 +1,10 @@
 data.table
 ggplot2
 languageserver
+lintr
 parallel
+roxygen2
 rstudioapi
 survey
 viridis
+xml2
