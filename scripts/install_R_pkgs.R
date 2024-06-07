@@ -7,10 +7,17 @@
 
 
 packages <-
-    commandArgs(trailingOnly=TRUE)
+    commandArgs(
+        trailingOnly =
+            TRUE
+    )
 
 packages_fmt <-
-    paste0("%",max(nchar(packages)),"s")
+    paste0(
+        "%",
+        max(nchar(packages)),
+        "s"
+    )
 
 
 for (
@@ -18,21 +25,47 @@ for (
     in
     packages
 ) {
-    if (!library(package, logical.return = TRUE, character.only = TRUE)) {
+    if (!library(package,
+        logical.return =
+            TRUE,
+        character.only =
+            TRUE
+    )) {
         cat(
             "Package",
-            sprintf(packages_fmt, package),
+            sprintf(
+                packages_fmt,
+                package
+            ),
             "installation:\n"
         )
-        install.packages(package, repos = "https://cloud.r-project.org")
+        install.packages(
+            package,
+            repos =
+                "https://cloud.r-project.org",
+            dependencies =
+                c("Depends", "Imports", "LinkingTo")
+        )
         cat("done\n")
-        if (!library(package, logical.return = TRUE, character.only = TRUE)) quit(status = 10)
+        if (!library(package,
+            logical.return =
+                TRUE,
+            character.only =
+                TRUE
+        )) {
+            quit(
+                status =
+                    10
+            )
+        }
     } else {
         cat(
             "Package",
-            sprintf(packages_fmt, package),
+            sprintf(
+                packages_fmt,
+                package
+            ),
             "already installed\n"
         )
     }
 }
-
