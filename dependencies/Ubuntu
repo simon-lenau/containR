@@ -8,4 +8,5 @@ libssl-dev
 libudunits2-dev 
 libxml2-dev
 openjdk-18-jdk 
+pandoc
 r-cran-rjava
