@@ -6,6 +6,7 @@ irr
 kableExtra
 knitr
 languageserver
+minqa
 parallel
 prolific.api
 rJava
