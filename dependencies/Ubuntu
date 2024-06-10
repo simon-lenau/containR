@@ -1,6 +1,7 @@
 openjdk-18-jdk
 libcairo2-dev
 libfontconfig1-dev
+libssl-dev
 libudunits2-dev
 libxml2-dev
 r-cran-rjava
