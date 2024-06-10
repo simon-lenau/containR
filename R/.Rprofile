@@ -12,13 +12,13 @@ options(
 # Use all available cores for data.table
 try(
     data.table::setDTthreads(
-                as.numeric(
-                    system(
-                        "nproc",
-                        intern =
-                            TRUE
-                    )
-                )
+        as.numeric(
+            system(
+                "nproc",
+                intern =
+                    TRUE
+            )
+        )
     )
 )
 
@@ -35,8 +35,7 @@ options(
 
 # ================ > Log message to print this file's path < ================= #
 
-cat("Loading /.Rprofile\n")
-
+if (interactive()) {
+    cat("Loading /.Rprofile\n")
+}
 # ────────────────────────────────── <end> ─────────────────────────────────── #
-
-
