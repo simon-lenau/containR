@@ -48,6 +48,7 @@ RUN \
     fi; \
     R CMD javareconf; \
     if [ -n "${r_packages}" ]; then \ 
+        ${CONTAINR_DIR}/entrypoint;
         ${CONTAINR_DIR}/install_R_pkgs "${r_packages}"; \
     fi
 
