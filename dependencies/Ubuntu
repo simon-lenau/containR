@@ -1,4 +1,5 @@
 default-jre
+default-jdk
 libcairo2-dev
 libfontconfig1-dev
 libxml2-dev
