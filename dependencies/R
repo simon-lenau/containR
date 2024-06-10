@@ -6,10 +6,12 @@ irr
 kableExtra
 knitr
 languageserver
+lavaan
 minqa
 parallel
 prolific.api
 rJava
+rlang
 reactable
 rstudioapi
 s2
