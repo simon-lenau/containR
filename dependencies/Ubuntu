@@ -1,2 +1,4 @@
 openjdk-18-jdk
-r-cran-rjava
+libcairo2-dev
+libfontconfig1-dev
+libxml2-dev
