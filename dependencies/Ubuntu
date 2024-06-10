@@ -1,0 +1,11 @@
+libcairo2-dev
+libfontconfig1-dev
+libgdal-dev 
+libgeos-dev
+libproj-dev 
+libssh-dev
+libssl-dev
+libudunits2-dev 
+libxml2-dev
+openjdk-18-jdk && R CMD javareconf
+r-cran-rjava
