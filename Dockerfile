@@ -46,6 +46,7 @@ RUN \
     if [ -n "${ubuntu_packages}" ]; then \
         ${CONTAINR_DIR}/install_ubuntu_pkgs "${ubuntu_packages}"; \
     fi; \
+    R CMD javareconf; \
     if [ -n "${r_packages}" ]; then \ 
         ${CONTAINR_DIR}/entrypoint; \
         echo "nproc is $(nproc)"; \
