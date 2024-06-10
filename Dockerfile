@@ -49,7 +49,7 @@ RUN \
     R CMD javareconf; \
     if [ -n "${r_packages}" ]; then \ 
         ${CONTAINR_DIR}/entrypoint; \
-        echo "nproc is $(nproc)" \
+        echo "nproc is $(nproc)"; \
         ${CONTAINR_DIR}/install_R_pkgs "${r_packages}"; \
     fi
 
