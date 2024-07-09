@@ -1,27 +1,27 @@
-data.table
-ggnewscale
-ggplot2
-httpgd
-irr
-kableExtra
-knitr
-languageserver
-lavaan
-minqa
-parallel
-prolific.api
-rJava
-rlang
-reactable
-rstudioapi
-s2
-semTools
-sf
-spatstat
-ssh
-stringdist
-survey
-texreg
-units
-viridis
-xlsx
+data.table latest
+ggnewscale latest
+ggplot2 latest
+httpgd latest
+irr latest
+kableExtra latest
+knitr latest
+languageserver latest
+lavaan latest
+minqa latest
+parallel latest
+prolific.api latest
+rJava latest
+rlang latest
+reactable latest
+rstudioapi latest
+s2 latest
+semTools latest
+sf latest
+spatstat latest
+ssh latest
+stringdist latest
+survey latest
+texreg latest
+units latest
+viridis latest
+xlsx latest
