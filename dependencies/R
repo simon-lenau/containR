@@ -8,7 +8,6 @@ knitr latest
 languageserver latest
 lavaan latest
 minqa latest
-parallel latest
 prolific.api latest
 rJava latest
 rlang latest

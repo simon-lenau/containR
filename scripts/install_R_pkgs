@@ -2,6 +2,7 @@
 
 packages=(${@})
 
+
 printf -- "================================================================================\n"
 
 printf -- "Attempting to install R-Packages:\n"
@@ -47,53 +48,51 @@ for ((i = 0; i < ${#packages[@]}; i += 2)); do
     pkg_indices[${pkg_index}]="${pkg_index}"
 done
 
-for pkg_index in "${pkg_indices[@]}"; do
-    pkg_ver="${pkg_versions[${pkg_index}]}"
-    if [[ "${pkg_ver}" == "latest" || "${pkg_ver}" == "NULL" ]]; then
-        pkg_ver_log="latest"
-        pkg_ver="NULL"
-    else
-        pkg_ver_log="${pkg_ver}"
-        pkg_ver="\"${pkg_ver}\""
-    fi
-    (
+(
+    for pkg_index in "${pkg_indices[@]}"; do
+        pkg_ver="${pkg_versions[${pkg_index}]}"
+        if [[ "${pkg_ver}" == "latest" || "${pkg_ver}" == "NULL" ]]; then
+            pkg_ver_log="latest"
+            pkg_ver="NULL"
+        else
+            pkg_ver_log="${pkg_ver}"
+            pkg_ver="\"${pkg_ver}\""
+        fi
         file_stub="${outdir}/${pkg_index}"
 
         statusfile="${file_stub}.ret"
         install_logfile="${file_stub}.inst"
         logfile="${file_stub}.log"
 
-        (
+        {
             printf "> %-30s %-30s" "${pkg_names[${pkg_index}]}" "${pkg_ver_log}"
             {
-                (
-                    Rscript \
-                        -e "
-                    options(warn=2)
-                    remotes::install_version(
+                Rscript \
+                    -e "
+                        options(warn=2)
+                        remotes::install_version(
                         \"${pkg_names[${pkg_index}]}\",
                         version=${pkg_ver},
                         repos=\"https://cloud.r-project.org\",
                         upgrade=FALSE
                     )
                     "
-                ) \
-                    >"${install_logfile}" 2>&1
-                retval=$?
-                echo "${retval}" >"${statusfile}"
-                if [ $retval -eq 0 ]; then
-                    printf -- " ... successful!\n" && rm -rf ${install_logfile}
-                else
-                    printf -- " ... failed:\n" &&
-                        cat "${install_logfile}" |
-                        perl -p0e "s/^/\t/gmi"
-                    #
-                fi
-                #
-            }
-        ) >${logfile} 2>&1
-    )
-done &
+            } \
+                >"${install_logfile}" 2>&1 && :
+
+            retval=$?
+
+            echo "${retval}" >${statusfile}
+
+            if [ ${retval} -ne 0 ]; then
+                printf -- " ... failed:\n" &&
+                    cat "${install_logfile}" | perl -pe 's/^/\t/'
+            else
+                printf -- " ... successful!\n" #&& rm -rf ${install_logfile}
+            fi
+        } >${logfile} 2>&1
+    done
+) &
 (
     # Continuously monitor all install processes.
     # If one finishes:
@@ -109,23 +108,21 @@ done &
             logfile="${file_stub}.log"
 
             if [ -f ${statusfile} ]; then
+                sleep 0.25
                 status=$(cat "${statusfile}")
                 cat "${logfile}"
                 unset pkg_indices[${pkg_index}]
-                rm -f "${statusfile}"
+                # rm -f "${statusfile}"
                 if [ $status -ne 0 ]; then
-                    rm -rf $outdir
                     exit $status
                 fi
-            # else
-            #     echo "Missing ${statusfile}"
             fi
         done
     done
-)
+) || exit $?
 
-# wait
+wait
 
-# rm -rf $outdir
+rm -rf $outdir
 
 printf -- "================================================================================\n"
