@@ -1,5 +1,5 @@
 variables:
-  FROM_IMAGE: index.docker.io/rocker/r-ver:4.4.1
+  FROM_IMAGE: index.docker.io/rocker/r-ver:4.5.0
 
 stages:
   - r-container-build
