@@ -1,1 +1,13 @@
 #!/usr/bin/env bash
+
+IMAGE_URL="projects.cispa.saarland:5005/c01sile/containr"
+CONTAINER_NAME="CONTAINR_TEST"
+
+docker remove "${CONTAINER_NAME}" >>/dev/null 2>&1
+
+docker pull ${IMAGE_URL}
+docker run \
+    -t -i \
+    --name "${CONTAINER_NAME}" \
+    ${IMAGE_URL} \
+    /bin/bash
