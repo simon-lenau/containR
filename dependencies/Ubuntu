@@ -1,5 +1,3 @@
-build-essential
-pkgconf-bin
 libcairo2-dev
 libfontconfig1-dev
 libfreetype6-dev
@@ -10,7 +8,7 @@ libssh-dev
 libssl-dev
 libudunits2-dev 
 libxml2-dev
-openjdk-18-jdk 
+openjdk-21-jdk
 pandoc
 pkg-config
 r-cran-rjava
