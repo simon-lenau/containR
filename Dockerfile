@@ -45,6 +45,8 @@ COPY R/Makevars /.R/
 RUN \
     if [ -n "${ubuntu_packages}" ]; then \
         ${CONTAINR_DIR}/install_ubuntu_pkgs "${ubuntu_packages}"; \
+        pkg-config --exists fontconfig && echo "fontconfig OK" || echo "fontconfig not OK"  ; \
+        pkg-config --exists freetype2  && echo "freetype2 OK" || echo "freetype2 not OK" ; \
     fi; \
     (R CMD javareconf) > /dev/null; \
     if [ -n "${r_packages}" ]; then \ 
