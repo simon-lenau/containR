@@ -50,12 +50,12 @@ RUN \
         dpkg -l pkgconf-bin || echo "dpkg -l pkgconf-bin NOT OK"; \
         ls -l /usr/bin/pkg-config || echo "ls -l /usr/bin/pkg-config NOT OK"; \
         echo "$PATH" | tr ':' '\n'; \
-    fi; \
-    (R CMD javareconf) > /dev/null; \
-    if [ -n "${r_packages}" ]; then \ 
-        ${CONTAINR_DIR}/entrypoint; \
-        ${CONTAINR_DIR}/install_R_pkgs "${r_packages}"; \
-    fi
+    fi; 
+    # (R CMD javareconf) > /dev/null; \
+    # if [ -n "${r_packages}" ]; then \ 
+    #     ${CONTAINR_DIR}/entrypoint; \
+    #     ${CONTAINR_DIR}/install_R_pkgs "${r_packages}"; \
+    # fi
 
 # ────────────────────────────────── <end> ─────────────────────────────────── #
 
