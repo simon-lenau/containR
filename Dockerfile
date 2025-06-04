@@ -47,6 +47,9 @@ RUN \
         ${CONTAINR_DIR}/install_ubuntu_pkgs "${ubuntu_packages}"; \
         pkg-config --exists fontconfig && echo "fontconfig OK" || echo "fontconfig not OK"  ; \
         pkg-config --exists freetype2  && echo "freetype2 OK" || echo "freetype2 not OK" ; \
+        dpkg -l pkgconf-bin || echo "dpkg -l pkgconf-bin NOT OK"; \
+        ls -l /usr/bin/pkg-config || echo "ls -l /usr/bin/pkg-config NOT OK"; \
+        echo "$PATH" | tr ':' '\n'; \
     fi; \
     (R CMD javareconf) > /dev/null; \
     if [ -n "${r_packages}" ]; then \ 

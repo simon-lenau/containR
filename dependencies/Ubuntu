@@ -10,6 +10,5 @@ libudunits2-dev
 libxml2-dev
 openjdk-18-jdk 
 pandoc
-pkgconf
 pkg-config
 r-cran-rjava
