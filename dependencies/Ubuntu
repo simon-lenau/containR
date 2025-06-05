@@ -3,8 +3,10 @@ libabsl-dev
 libcairo2-dev
 libfontconfig1-dev
 libfreetype6-dev
+libfribidi-dev
 libgdal-dev 
 libgeos-dev
+libharfbuzz-dev
 libproj-dev 
 libssh-dev
 libssl-dev
@@ -14,3 +16,4 @@ openjdk-21-jdk
 pandoc
 pkg-config
 r-cran-rjava
+
