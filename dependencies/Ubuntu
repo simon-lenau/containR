@@ -11,6 +11,7 @@ libproj-dev
 libssh-dev
 libssl-dev
 libudunits2-dev 
+libuv1-dev
 libxml2-dev
 openjdk-21-jdk
 pandoc
